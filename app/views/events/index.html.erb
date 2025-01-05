@@ -1,14 +1,17 @@
-<h1>All Events</h1>
-
-<div class="float-end">
-  <%= link_to "Create Event", new_events_path, class: "btn btn-primary" %>
+<div class="container mt-3 mb-3">
+  <div class="row">
+    <div class="col-8"><h1>All Events</h1></div>
+    <div class="col-4"><%= link_to "Create Event", new_events_path, class: "btn btn-primary" %></div>
+  </div>
 </div>
 
-<% @events.each do |event| %>
-  <div>
-    <div><h1><%= event.name %></h1></div>
-    <div><%= event.location %></div>
-    <div><%= event.starts_at %> - <%= event.ends_at %></div>
-    <div><%= event.description %></div>
-  </ul>
-<% end %>
+<ul class="list-group">
+  <% @events.each do |event| %>
+    <li class="list-group-item mt-3 mb-3">
+      <div><h3 class="text-primary"><%= event.name %></h3></div>
+      <div class="text-danger-emphasis">Location: <i><%= event.location %></i></div>
+      <div>At: <%= event.starts_at %> - <%= event.ends_at %></div>
+      <div><%= event.description %></div>
+    </li>
+  <% end %>
+</ul>
