@@ -33,11 +33,4 @@ feature "User logs in" do
     expect(page).to have_content("Invalid email or password.")
     expect(page).to have_content("Log In")
   end
-
-  def log_in_with(email, password)
-    visit new_sessions_path
-    fill_in "Email", with: email
-    fill_in "Password", with: password
-    click_button "Log In"
-  end
 end
