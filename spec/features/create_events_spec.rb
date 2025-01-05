@@ -24,7 +24,7 @@ feature "User creates event" do
     expect(page).to have_content(event_name)
     expect(page).to have_content("This is my first event")
     expect(page).to have_content("Dubai Mall")
-    expect(page).to have_content("2025-01-07 13:00:00 UTC")
-    expect(page).to have_content("2025-01-07 17:00:00 UTC")
+    expect(page).to have_content("7 Jan 2025 01:00 pm")
+    expect(page).to have_content("7 Jan 2025 05:00 pm")
   end
 end
