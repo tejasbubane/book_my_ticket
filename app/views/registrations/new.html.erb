@@ -1,33 +1,35 @@
-<h1>Sign Up</h1>
+<div class="w-50">
+  <h1>Sign Up</h1>
 
-<%= form_with model: @user, url: registrations_path do |form| %>
-  <% if form.object.errors.any? %>
-    <% form.object.errors.full_messages.each do |message| %>
-      <div><%= message %></div>
+  <%= form_with model: @user, url: registrations_path do |form| %>
+    <% if form.object.errors.any? %>
+      <% form.object.errors.full_messages.each do |message| %>
+        <div><%= message %></div>
+      <% end %>
     <% end %>
+
+    <div class="mb-3">
+      <%= form.label :name, "Full Name", class: "form-label" %>
+      <%= form.text_field :name, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :email, class: "form-label" %>
+      <%= form.email_field :email, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :password, class: "form-label" %>
+      <%= form.password_field :password, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :password_confirmation, class: "form-label" %>
+      <%= form.password_field :password_confirmation, class: "form-control" %>
+    </div>
+
+    <div>
+      <%= form.submit "Sign Up", class: "btn btn-primary" %>
+    </div>
   <% end %>
-
-  <div class="mb-3">
-    <%= form.label :name, "Full Name", class: "form-label" %>
-    <%= form.text_field :name, class: "form-control" %>
-  </div>
-
-  <div class="mb-3">
-    <%= form.label :email, class: "form-label" %>
-    <%= form.email_field :email, class: "form-control" %>
-  </div>
-
-  <div class="mb-3">
-    <%= form.label :password, class: "form-label" %>
-    <%= form.password_field :password, class: "form-control" %>
-  </div>
-
-  <div class="mb-3">
-    <%= form.label :password_confirmation, class: "form-label" %>
-    <%= form.password_field :password_confirmation, class: "form-control" %>
-  </div>
-
-  <div>
-    <%= form.submit "Sign Up", class: "btn btn-primary" %>
-  </div>
-<% end %>
+</div>

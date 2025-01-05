@@ -1,0 +1,45 @@
+<div class="w-50">
+  <h1>Create Event</h1>
+
+  <%= form_with model: @event, url: events_path do |form| %>
+    <% if form.object.errors.any? %>
+      <% form.object.errors.full_messages.each do |message| %>
+        <div><%= message %></div>
+      <% end %>
+    <% end %>
+
+    <div class="mb-3">
+      <%= form.label :name, "Event Name", class: "form-label" %>
+      <%= form.text_field :name, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :description, class: "form-label" %>
+      <%= form.text_area :description, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :location, class: "form-label" %>
+      <%= form.text_field :location, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :starts_at, class: "form-label" %>
+      <%= form.datetime_field :starts_at, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :ends_at, class: "form-label" %>
+      <%= form.datetime_field :ends_at, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :total_tickets, "Number of tickets", class: "form-label" %>
+      <%= form.number_field :total_tickets, class: "form-control" %>
+    </div>
+
+    <div>
+      <%= form.submit "Create", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>
