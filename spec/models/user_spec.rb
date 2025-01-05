@@ -5,6 +5,11 @@ RSpec.describe User, type: :model do
     it { is_expected.to have_secure_password }
   end
 
+  describe "associations" do
+    it { is_expected.to have_many(:tickets) }
+    it { is_expected.to have_many(:events) }
+  end
+
   describe "validations" do
     subject { build(:user) }
 
