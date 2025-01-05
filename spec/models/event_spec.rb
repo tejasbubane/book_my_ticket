@@ -10,13 +10,13 @@ RSpec.describe Event, type: :model do
     it { is_expected.to validate_presence_of(:name) }
     it { is_expected.to validate_presence_of(:starts_at) }
     it { is_expected.to validate_presence_of(:ends_at) }
-    it { is_expected.to validate_presence_of(:total_tickets) }
+    it { is_expected.to validate_presence_of(:total_tickets_count) }
 
-    describe "sold_tickets" do
+    describe "sold_tickets_count" do
       it "fails when sold tickets are more than total tickets" do
-        event = build(:event, total_tickets: 20, sold_tickets: 21)
+        event = build(:event, total_tickets_count: 20, sold_tickets_count: 21)
         expect(event).not_to be_valid
-        expect(event.errors[:sold_tickets]).to eq([ "must be equal to or less than total tickets" ])
+        expect(event.errors[:sold_tickets_count]).to eq([ "must be equal to or less than total tickets" ])
       end
     end
   end

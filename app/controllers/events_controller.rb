@@ -25,6 +25,6 @@ class EventsController < ApplicationController
   private
 
   def event_params
-    params.expect(event: %i[name description location starts_at ends_at total_tickets])
+    params.expect(event: %i[name description location starts_at ends_at total_tickets_count])
   end
 end

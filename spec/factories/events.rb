@@ -5,7 +5,7 @@ FactoryBot.define do
     location { Faker::Movies::HarryPotter.location }
     starts_at { 2.hours.from_now }
     ends_at { 3.hours.from_now }
-    total_tickets { 50 }
-    sold_tickets { 50 }
+    total_tickets_count { 50 }
+    sold_tickets_count { 50 }
   end
 end
