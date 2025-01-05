@@ -10,5 +10,13 @@ RSpec.describe User, type: :model do
 
     it { is_expected.to validate_presence_of(:email) }
     it { is_expected.to validate_uniqueness_of(:email).ignoring_case_sensitivity }
+
+    describe "email format" do
+      it "validates email format" do
+        user = build(:user, email: "foobar")
+        expect(user).not_to be_valid
+        expect(user.errors[:email]).to be_present
+      end
+    end
   end
 end
