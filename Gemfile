@@ -49,10 +49,21 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
+
+  # Testing framework
+  gem "rspec-rails"
+
+  # Fixtures for testing
+  gem "factory_bot_rails"
+
+  # Fake data generation
+  gem "faker"
+
+  # Testing inbuilt functionality (validations, associations, etc)
+  gem "shoulda-matchers"
 end
 
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
 end
-
