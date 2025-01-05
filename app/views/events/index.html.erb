@@ -1,17 +1,15 @@
 <div class="container mt-3 mb-3">
   <div class="row">
     <div class="col-8"><h1>All Events</h1></div>
-    <div class="col-4"><%= link_to "Create Event", new_events_path, class: "btn btn-primary" %></div>
+    <div class="col-4"><%= link_to "Create Event", new_event_path, class: "btn btn-primary" %></div>
   </div>
 </div>
 
 <ul class="list-group">
   <% @events.each do |event| %>
     <li class="list-group-item mt-3 mb-3">
-      <div><h3 class="text-primary"><%= event.name %></h3></div>
-      <div class="text-danger-emphasis">Location: <i><%= event.location %></i></div>
-      <div>At: <%= format_timestamp(event.starts_at) %> - <%= format_timestamp(event.ends_at) %></div>
-      <div><%= event.description %></div>
+      <%= render partial: "event_details", locals: { event: } %>
+      <div class="mt-1"><%= link_to "Book now", event_path(event.id), class: "btn btn-sm btn-primary" %>
     </li>
   <% end %>
 </ul>

@@ -14,6 +14,6 @@ class SessionsController < ApplicationController
 
   def destroy
     logout current_user
-    redirect_to new_sessions_path, notice: "Logged out successfully!"
+    redirect_to new_session_path, notice: "Logged out successfully!"
   end
 end

@@ -38,7 +38,7 @@ feature "User registers" do
   end
 
   def sign_up_with(email, password, password_confirmation)
-    visit new_registrations_path
+    visit new_registration_path
     fill_in "Full Name", with: "Tejas Bubane"
     fill_in "Email", with: email
     fill_in "Password", with: password
