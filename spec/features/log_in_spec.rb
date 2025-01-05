@@ -33,4 +33,11 @@ feature "User logs in" do
     expect(page).to have_content("Invalid email or password.")
     expect(page).to have_content("Log In")
   end
+
+  scenario "without login redirects to login page" do
+    visit root_path
+
+    expect(page).not_to have_content("All Events")
+    expect(page).to have_content("Log In")
+  end
 end
