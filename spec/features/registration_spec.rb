@@ -11,6 +11,7 @@ feature "User registers" do
   scenario "with invalid email" do
     sign_up_with "foobar", "password", "password"
 
+    expect(page).to have_content("Email is invalid")
     expect(page).to have_content("Log In")
   end
 
