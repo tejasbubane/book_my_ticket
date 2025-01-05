@@ -61,6 +61,12 @@ group :development, :test do
 
   # Testing inbuilt functionality (validations, associations, etc)
   gem "shoulda-matchers"
+
+  # Integration testing
+  gem "capybara"
+
+  # Capybara interacts with browser
+  gem "webdrivers"
 end
 
 group :development do
