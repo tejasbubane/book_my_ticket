@@ -26,5 +26,6 @@ class EventsController < ApplicationController
 
   def event_params
     params.expect(event: %i[name description location starts_at ends_at total_tickets_count])
+          .merge(creator_id: current_user.id)
   end
 end

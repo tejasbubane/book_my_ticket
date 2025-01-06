@@ -7,5 +7,6 @@ FactoryBot.define do
     ends_at { 3.hours.from_now }
     total_tickets_count { 50 }
     sold_tickets_count { 50 }
+    association :creator, factory: :user
   end
 end

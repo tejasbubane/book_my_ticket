@@ -2,6 +2,7 @@ class Event < ApplicationRecord
   # Association
   has_many :tickets, counter_cache: :tickets_sold
   has_many :users, through: :tickets
+  belongs_to :creator, class_name: User.to_s
 
   # Validations
   validates :name, presence: true

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_05_202523) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_06_080433) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -24,6 +24,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_05_202523) do
     t.integer "sold_tickets_count", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "creator_id"
+    t.index ["creator_id"], name: "index_events_on_creator_id"
     t.check_constraint "sold_tickets_count <= total_tickets_count", name: "sold_tickets_count_check"
   end
 

@@ -4,8 +4,7 @@ feature "User creates event" do
   let(:email) { "foobar@example.com" }
   let(:password) { "super_secret_password" }
   let(:event_name) { "First Event" }
-
-  before { create(:user, email:, password:, password_confirmation: password) }
+  let!(:current_user) { create(:user, email:, password:, password_confirmation: password) }
 
   scenario "when all data is correct" do
     log_in_with email, password
@@ -19,7 +18,7 @@ feature "User creates event" do
     fill_in "Number of tickets", with: 100
     click_button "Create"
 
-    expect(Event.find_by(name: event_name)).to be_present
+    expect(Event.find_by(name: event_name, created_by: current_user)).to be_present
 
     expect(page).to have_content(event_name)
     expect(page).to have_content("This is my first event")
