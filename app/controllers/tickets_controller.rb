@@ -3,7 +3,10 @@ class TicketsController < ApplicationController
 
   def create
     if event.can_book?(params[:count])
-      Ticket.insert_all(ticket_params)
+      ApplicationRecord.transaction do
+        Ticket.insert_all(ticket_params)
+        event.increment(:sold_tickets_count, params[:count].to_i).save!
+      end
 
       flash[:notice] = "#{pluralize(params[:count], "ticket")} booked successfully! Enjoy the show!"
     else
