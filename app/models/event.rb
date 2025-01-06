@@ -24,4 +24,8 @@ class Event < ApplicationRecord
   def can_book?(ticket_count)
     ticket_count.to_i <= available_tickets_count.to_i
   end
+
+  def past?
+    starts_at <= Time.current
+  end
 end

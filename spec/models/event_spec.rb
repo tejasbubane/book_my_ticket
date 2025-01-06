@@ -20,4 +20,34 @@ RSpec.describe Event, type: :model do
       end
     end
   end
+
+  describe "#available_tickets_count" do
+    subject { build(:event, total_tickets_count: 30, sold_tickets_count: 2) }
+
+    it "returns available tickets for this event" do
+      expect(subject.available_tickets_count).to eq(28)
+    end
+  end
+
+  describe "#can_book?" do
+    subject { build(:event, total_tickets_count: 30, sold_tickets_count: 22) }
+
+    it "can book upto available tickets" do
+      expect(subject.can_book?(5)).to be(true)
+      expect(subject.can_book?(8)).to be(true)
+      expect(subject.can_book?(9)).to be(false)
+    end
+  end
+
+  describe "#past?" do
+    let(:past_event) { build(:event, starts_at: 2.hours.ago) }
+    let(:running_event) { build(:event, starts_at: Time.current) }
+    let(:future_event) { build(:event, starts_at: 1.hour.from_now) }
+
+    it "checks if event is past" do
+      expect(past_event).to be_past
+      expect(running_event).to be_past
+      expect(future_event).not_to be_past
+    end
+  end
 end
