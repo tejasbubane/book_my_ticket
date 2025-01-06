@@ -16,6 +16,7 @@ class Event < ApplicationRecord
 
   # Scopes
   scope :future, -> { where("starts_at >= ?", Time.current) }
+  scope :recent_first, -> { order(:starts_at) }
 
   def available_tickets_count
     total_tickets_count.to_i - sold_tickets_count.to_i

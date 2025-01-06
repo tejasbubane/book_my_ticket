@@ -11,12 +11,14 @@ describe EventsQuery do
   let(:filter) { {} }
 
   subject { described_class.call(current_user, filter) }
+  let(:received_event_ids) { subject.map(&:id) }
 
   context "created events" do
     let(:filter) { { created: true } }
 
-    it "returns events created by user" do
-      expect(subject.ids).to match_array((past_events_current_user + future_events_current_user).map(&:id))
+    it "returns events created by user in recent first order" do
+      expected_event_ids = (past_events_current_user + future_events_current_user).sort_by(&:starts_at).map(&:id)
+      expect(received_event_ids).to eq(expected_event_ids)
     end
   end
 
@@ -29,14 +31,15 @@ describe EventsQuery do
       end
     end
 
-    it "returns events booked by user" do
-      expect(subject.ids).to match_array(future_events_other_user.map(&:id))
+    it "returns events booked by user in recent first order" do
+      expect(received_event_ids).to eq(future_events_other_user.sort_by(&:starts_at).map(&:id))
     end
   end
 
   context "all events" do
-    it "returns all future events" do
-      expect(subject.ids).to match_array((future_events_current_user + future_events_other_user).map(&:id))
+    it "returns all future events in recent first order" do
+      expected_event_ids = (future_events_current_user + future_events_other_user).sort_by(&:starts_at).map(&:id)
+      expect(received_event_ids).to eq(expected_event_ids)
     end
   end
 end

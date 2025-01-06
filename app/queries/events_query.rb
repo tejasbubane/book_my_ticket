@@ -8,11 +8,11 @@ class EventsQuery < BaseQuery
 
   def call
     if filter[:created]
-      current_user.created_events
+      current_user.created_events.recent_first
     elsif filter[:booked]
-      current_user.booked_events
+      current_user.booked_events.recent_first
     else
-      Event.future
+      Event.future.recent_first.recent_first
     end
   end
 end
