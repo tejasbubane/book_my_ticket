@@ -7,13 +7,11 @@
 
 <ul class="list-group">
   <% @events.each do |event| %>
-    <% cache event do %>
-      <li class="list-group-item mb-3" data-uuid="<%= event.id %>">
-        <%= render partial: "event_details", locals: { event: } %>
-        <% link_text = event.past? ? "View Details" : "Book Now" %>
-        <div class="mt-1"><%= link_to link_text, event_path(event.id), class: "btn btn-sm btn-primary" %>
-      </li>
-    <% end %>
+    <li class="list-group-item mb-3" data-uuid="<%= event.id %>">
+      <%= render partial: "event_details", locals: { event:, show_tickets: params.dig(:filter, :booked).present? }, cached: true %>
+      <% link_text = event.past? ? "View Details" : "Book Now" %>
+      <div class="mt-1"><%= link_to link_text, event_path(event.id), class: "btn btn-sm btn-primary" %>
+    </li>
   <% end %>
 </ul>
 

@@ -7,5 +7,9 @@
   <% end %>
 </div>
 <div class="text-danger-emphasis">Location: <i><%= event.location %></i></div>
-<div>At: <%= format_timestamp(event.starts_at) %></div>
-<div><%= event.description %></div>
+<div class="mb-3">At: <i><%= format_timestamp(event.starts_at) %></i></div>
+<div class="mb-3">Description: <i><%= event.description %></i></div>
+
+<% if show_tickets %>
+  <div class="mb-3">Tickets booked: <%= event.tickets.for_user(current_user).count %></div>
+<% end %>
