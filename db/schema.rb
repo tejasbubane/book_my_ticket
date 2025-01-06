@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_06_082411) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_06_090605) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -29,8 +29,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_06_082411) do
   end
 
   create_table "tickets", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "event_id"
-    t.string "user_id"
+    t.uuid "event_id"
+    t.uuid "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["event_id"], name: "index_tickets_on_event_id"
