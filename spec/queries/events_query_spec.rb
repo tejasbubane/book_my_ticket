@@ -3,9 +3,19 @@ require "rails_helper"
 describe EventsQuery do
   let!(:current_user) { create(:user) }
   let!(:past_events_current_user) { create_list(:event, 2, starts_at: 3.hours.ago, creator: current_user) }
-  let!(:future_events_current_user) { create_list(:event, 2, starts_at: 3.hours.from_now, creator: current_user) }
+  let!(:future_events_current_user) do
+    [
+      create(:event, creator: current_user, starts_at: 4.hours.from_now),
+      create(:event, creator: current_user, starts_at: 3.hours.from_now)
+    ]
+  end
   let!(:past_events_other_user) { create_list(:event, 2, starts_at: 3.hours.ago) }
-  let!(:future_events_other_user) { create_list(:event, 2, starts_at: 3.hours.from_now) }
+  let!(:future_events_other_user) do
+    [
+      create(:event, starts_at: 4.hours.from_now),
+      create(:event, starts_at: 3.hours.from_now)
+    ]
+  end
   let(:all_past_events) { past_events_current_user + past_events_other_user }
   let(:all_future_events) { future_events_current_user + future_events_other_user }
   let(:filter) { {} }

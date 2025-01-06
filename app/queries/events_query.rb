@@ -12,7 +12,7 @@ class EventsQuery < BaseQuery
     elsif filter[:booked]
       current_user.booked_events.recent_first
     else
-      Event.future.recent_first.recent_first
+      Event.future.recent_first
     end
   end
 end
