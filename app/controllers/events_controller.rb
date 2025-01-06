@@ -2,7 +2,14 @@ class EventsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @events = params[:created] ? current_user.created_events : Event.future
+    @events =
+      if params[:created]
+        current_user.created_events
+      elsif params[:booked]
+        current_user.booked_events
+      else
+        Event.future
+      end
   end
 
   def new
