@@ -36,9 +36,13 @@
       <div class="container-fluid">
         <a class="navbar-brand text-primary" href="/">Book My Ticket</a>
         <ul class="navbar-nav">
-          <%= link_to "My Events", events_path(filter: { created: true }), class: "nav-link" %>
-          <%= link_to "My Bookings", events_path(filter: { booked: true }), class: "nav-link" %>
           <% if current_user.present? %>
+            <li class="nav-item">
+              <%= link_to "My Events", events_path(filter: { created: true }), class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "My Bookings", events_path(filter: { booked: true }), class: "nav-link" %>
+            </li>
             <li class="nav-item">
               <%= button_to "Log out", sessions_path, method: :delete, class: "nav-link" %>
             </li>
