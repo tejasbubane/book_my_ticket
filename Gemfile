@@ -70,6 +70,9 @@ group :development, :test do
 
   # Capybara interacts with browser
   gem "webdrivers"
+
+  # Calculate test coverage
+  gem "simplecov", require: false
 end
 
 group :development do
