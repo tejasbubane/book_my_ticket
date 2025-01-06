@@ -2,26 +2,19 @@ class TicketsController < ApplicationController
   include ActionView::Helpers::TextHelper
 
   def create
-    if event.can_book?(params[:count])
-      ApplicationRecord.transaction do
-        Ticket.insert_all(ticket_params)
-        event.increment(:sold_tickets_count, params[:count].to_i).save!
-      end
-
+    result = service.call
+    if result.success?
       flash[:notice] = "#{pluralize(params[:count], "ticket")} booked successfully! Enjoy the show!"
     else
-      flash[:alert] = "Invalid email or password."
+      flash[:alert] = result.failure
     end
-    redirect_to event_path(event)
+
+    redirect_to event_path(params[:event_id])
   end
 
   private
 
-  def event
-    @event = Event.find(params[:event_id])
-  end
-
-  def ticket_params
-    params[:count].to_i.times.map { { event_id: params[:event_id], user_id: current_user.id } }
+  def service
+    @service ||= TicketBookingService.new(params[:event_id], params[:count], current_user)
   end
 end
