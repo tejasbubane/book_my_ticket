@@ -1,4 +1,11 @@
-<div><h3 class="text-primary"><%= event.name %></h3></div>
+<div>
+  <%= link_to event_path(event) do %>
+    <h3 class="text-primary" style="display: inline"><%= event.name %></h3>
+  <% end %>
+  <% if event.past? %>
+    <button type="button" class="btn btn-sm btn-outline-secondary btn-disabled mb-2">Past Event</button>
+  <% end %>
+</div>
 <div class="text-danger-emphasis">Location: <i><%= event.location %></i></div>
 <div>At: <%= format_timestamp(event.starts_at) %></div>
 <div><%= event.description %></div>
