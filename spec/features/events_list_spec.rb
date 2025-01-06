@@ -1,5 +1,7 @@
 require "rails_helper"
 
+# Use custom RSpec matcher `have_event` defined in spec/support/event_helper.rb
+
 feature "User sees list of events" do
   let(:email) { "foobar@example.com" }
   let(:password) { "super_secret_password" }
@@ -16,10 +18,10 @@ feature "User sees list of events" do
       log_in_with email, password
 
       all_future_events.each do |event|
-        expect(page).to have_content(event.name)
+        expect(page).to have_event(event)
       end
       all_past_events.each do |event|
-        expect(page).not_to have_content(event.name)
+        expect(page).not_to have_event(event)
       end
     end
   end
@@ -30,10 +32,10 @@ feature "User sees list of events" do
       click_link "My Events"
 
       (past_events_current_user + future_events_current_user).each do |event|
-        expect(page).to have_content(event.name)
+        expect(page).to have_event(event)
       end
       (past_events_other_user + future_events_other_user).each do |event|
-        expect(page).not_to have_content(event.name)
+        expect(page).not_to have_event(event)
       end
     end
   end
@@ -45,9 +47,9 @@ feature "User sees list of events" do
       log_in_with email, password
       click_link "My Bookings"
 
-      expect(page).to have_content(ticket.event.name)
+      expect(page).to have_event(ticket.event)
       future_events_current_user.each do |event|
-        expect(page).not_to have_content(event.name)
+        expect(page).not_to have_event(event)
       end
     end
   end
