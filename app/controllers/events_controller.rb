@@ -2,7 +2,7 @@ class EventsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @events = EventsQuery.call(current_user, params[:filter])
+    @events = EventsQuery.call(current_user, params[:filter]).page(params[:page])
   end
 
   def new
