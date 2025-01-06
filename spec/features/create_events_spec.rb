@@ -18,7 +18,7 @@ feature "User creates event" do
     fill_in "Number of tickets", with: 100
     click_button "Create"
 
-    expect(Event.find_by(name: event_name, created_by: current_user)).to be_present
+    expect(Event.find_by(name: event_name, creator: current_user)).to be_present
 
     expect(page).to have_content(event_name)
     expect(page).to have_content("This is my first event")

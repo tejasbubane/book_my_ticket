@@ -24,7 +24,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_06_080433) do
     t.integer "sold_tickets_count", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "creator_id"
+    t.uuid "creator_id"
     t.index ["creator_id"], name: "index_events_on_creator_id"
     t.check_constraint "sold_tickets_count <= total_tickets_count", name: "sold_tickets_count_check"
   end
