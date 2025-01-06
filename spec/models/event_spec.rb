@@ -10,7 +10,6 @@ RSpec.describe Event, type: :model do
   describe "validations" do
     it { is_expected.to validate_presence_of(:name) }
     it { is_expected.to validate_presence_of(:starts_at) }
-    it { is_expected.to validate_presence_of(:ends_at) }
     it { is_expected.to validate_presence_of(:total_tickets_count) }
 
     describe "sold_tickets_count" do

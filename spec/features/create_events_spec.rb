@@ -14,7 +14,6 @@ feature "User creates event" do
     fill_in "Description", with: "This is my first event"
     fill_in "Location", with: "Dubai Mall"
     fill_in "Starts at", with: "07 / 01 / 2025, 01:00 pm"
-    fill_in "Ends at", with: "07 / 01 / 2025, 05:00 pm"
     fill_in "Number of tickets", with: 100
     click_button "Create"
 
@@ -24,6 +23,5 @@ feature "User creates event" do
     expect(page).to have_content("This is my first event")
     expect(page).to have_content("Dubai Mall")
     expect(page).to have_content("7 Jan 2025 01:00 pm")
-    expect(page).to have_content("7 Jan 2025 05:00 pm")
   end
 end

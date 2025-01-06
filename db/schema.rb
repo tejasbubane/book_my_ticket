@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_06_080433) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_06_082411) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -19,7 +19,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_06_080433) do
     t.string "description"
     t.string "location"
     t.datetime "starts_at", precision: nil
-    t.datetime "ends_at", precision: nil
     t.integer "total_tickets_count", default: 0
     t.integer "sold_tickets_count", default: 0
     t.datetime "created_at", null: false

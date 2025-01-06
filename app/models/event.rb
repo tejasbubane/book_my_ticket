@@ -7,7 +7,6 @@ class Event < ApplicationRecord
   # Validations
   validates :name, presence: true
   validates :starts_at, presence: true
-  validates :ends_at, presence: true
   validates :total_tickets_count, presence: true
   validate do |event|
     if event.sold_tickets_count.to_i > event.total_tickets_count.to_i
