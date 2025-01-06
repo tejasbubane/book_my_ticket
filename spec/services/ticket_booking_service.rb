@@ -6,7 +6,7 @@ describe TicketBookingService do
   let(:count) { 2 }
   let(:current_user) { event.creator }
 
-  subject { described_class.call(event_id, count, current_user) }
+  subject { described_class.new(event_id, count, current_user).call }
 
   context "when event does not exist" do
     let(:event_id) { SecureRandom.uuid }
@@ -31,6 +31,14 @@ describe TicketBookingService do
       expect { subject }.to change(Ticket, :count).by(count).and change { event.reload.sold_tickets_count }.from(0).to(count)
       expect(subject.success.id).to eq(event.id)
       expect(subject.failure).to be(nil)
+    end
+
+    it "locks event row before booking tickets" do
+      # with_lock is Rails internals and we do not need to test that - mocking it should be enough
+      allow(Event).to receive(:find_by).and_return(event)
+      expect(event).to receive(:with_lock).and_call_original
+
+      subject
     end
   end
 end

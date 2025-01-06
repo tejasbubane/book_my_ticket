@@ -10,7 +10,7 @@ class TicketBookingService < BaseService
   def call
     event = yield find_event
 
-    ApplicationRecord.transaction do
+    event.with_lock do
       Ticket.insert_all(ticket_params)
       event.increment(:sold_tickets_count, count).save!
       Success(event)
