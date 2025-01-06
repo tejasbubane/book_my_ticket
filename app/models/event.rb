@@ -14,6 +14,9 @@ class Event < ApplicationRecord
     end
   end
 
+  # Scopes
+  scope :future, -> { where("starts_at >= ?", Time.current) }
+
   def available_tickets_count
     total_tickets_count.to_i - sold_tickets_count.to_i
   end
