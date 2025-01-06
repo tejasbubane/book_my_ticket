@@ -6,7 +6,7 @@ class TicketsController < ApplicationController
     if result.success?
       flash[:notice] = "#{pluralize(params[:count], "ticket")} booked successfully! Enjoy the show!"
     else
-      flash[:alert] = result.failure
+      flash[:alert] = "Ticket booking failed, please try again."
     end
 
     redirect_to event_path(params[:event_id])
