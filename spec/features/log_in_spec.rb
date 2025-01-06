@@ -9,7 +9,7 @@ feature "User logs in" do
   scenario "with valid email and password" do
     log_in_with email, password
 
-    expect(page).to have_content("All Events")
+    expect(page).to have_content("Events")
     expect(page).to have_content("Log out")
   end
 
@@ -37,7 +37,7 @@ feature "User logs in" do
   scenario "without login redirects to login page" do
     visit root_path
 
-    expect(page).not_to have_content("All Events")
+    expect(page).not_to have_content("Events")
     expect(page).to have_content("Log In")
   end
 end

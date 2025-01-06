@@ -4,7 +4,7 @@ feature "User registers" do
   scenario "with valid email and password" do
     sign_up_with "foobar@example.com", "password", "password"
 
-    expect(page).to have_content("All Events")
+    expect(page).to have_content("Events")
     expect(page).to have_content("Log out")
   end
 
