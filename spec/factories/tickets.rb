@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :ticket do
-    event_id { "MyString" }
-    user_id { "MyString" }
+    event
+    user
   end
 end

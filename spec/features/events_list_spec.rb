@@ -37,4 +37,18 @@ feature "User sees list of events" do
       end
     end
   end
+
+  context "when showing events booked my current user" do
+    let!(:ticket) { create(:ticket, user: current_user, event: future_events_other_user.first) }
+
+    it "shows only booked events" do
+      log_in_with email, password
+      click_link "My Bookings"
+
+      expect(page).to have_content(ticket.event.name)
+      future_events_current_user.each do |event|
+        expect(page).not_to have_content(event.name)
+      end
+    end
+  end
 end
