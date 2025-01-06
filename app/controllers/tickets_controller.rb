@@ -1,9 +1,11 @@
 class TicketsController < ApplicationController
+  include ActionView::Helpers::TextHelper
+
   def create
     if event.can_book?(params[:count])
       Ticket.insert_all(ticket_params)
 
-      flash[:notice] = "#{params[:count]} tickets booked successfully! Enjoy the show!"
+      flash[:notice] = "#{pluralize(params[:count], "ticket")} booked successfully! Enjoy the show!"
     else
       flash[:alert] = "Invalid email or password."
     end

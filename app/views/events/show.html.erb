@@ -3,16 +3,16 @@
 
   <b>Book tickets</b>
 
-  <% if @event.available_tickets.zero? %>
+  <% if @event.available_tickets_count.zero? %>
     <p>Sorry this event is fully booked!</p>
   <% else %>
-    <% max_quantity = [@event.available_tickets, 10].min %>
+    <% max_quantity = [@event.available_tickets_count, 10].min %>
     <% quantity_select_options = max_quantity.times.map { |i| [i + 1, i + 1] } %>
 
     <%= form_with url: tickets_path, class: "col-2" do |form| %>
       <div class="mb-3">
-        <%= form.label :count, "Qty.", class: "form-label" %>
-        <%= form.select :count, quantity_select_options, { include_blank: true }, { class: "form-control form-select" } %>
+        <%= form.label :count, "Qty:", class: "form-label" %>
+        <%= form.select :count, quantity_select_options, {}, { class: "form-control form-select" } %>
       </div>
 
       <%= form.hidden_field :event_id, value: @event.id %>
