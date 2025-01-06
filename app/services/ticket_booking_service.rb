@@ -14,9 +14,11 @@ class TicketBookingService < BaseService
       Ticket.insert_all(ticket_params)
       event.increment(:sold_tickets_count, count).save!
       Success(event)
-    rescue ActiveRecord::RecordInvalid, ActiveRecord::StatementInvalid => e
+    rescue ActiveRecord::RecordInvalid => e
       Failure(e.message)
     end
+  rescue ActiveRecord::StatementInvalid => e
+    Failure(e.message)
   end
 
   private

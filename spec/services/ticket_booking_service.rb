@@ -40,5 +40,31 @@ describe TicketBookingService do
 
       subject
     end
+
+    it "hits validation error when concurrent users" do
+      # We mimic concurrency here by using stale event record
+      stale_event = Event.find(event.id)
+
+      allow(Event).to receive(:find_by).and_return(event)
+      subject
+
+      allow(Event).to receive(:find_by).and_return(stale_event)
+      expect(stale_event.sold_tickets_count).to eq(0) # no tickets booked on this stale object yet
+      second_result = described_class.new(event_id, 19, current_user).call
+      expect(second_result.failure).to eq("Validation failed: Sold tickets count must be equal to or less than total tickets")
+    end
+
+    it "hits database constraint when peak concurrency" do
+      stale_event = Event.find(event.id)
+
+      allow(Event).to receive(:find_by).and_return(event)
+      subject
+
+      allow(Event).to receive(:find_by).and_return(stale_event)
+      allow(stale_event).to receive(:valid?).and_return(true) # skip validation to hit DB constaint
+      expect(stale_event.sold_tickets_count).to eq(0) # no tickets booked on this stale object yet
+      second_result = described_class.new(event_id, 19, current_user).call
+      expect(second_result.failure).to include("PG::CheckViolation: ERROR:")
+    end
   end
 end
