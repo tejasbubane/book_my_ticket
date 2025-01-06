@@ -7,10 +7,12 @@
 
 <ul class="list-group">
   <% @events.each do |event| %>
-    <li class="list-group-item mb-3" data-uuid="<%= event.id %>">
-      <%= render partial: "event_details", locals: { event: } %>
-      <% link_text = event.past? ? "View Details" : "Book Now" %>
-      <div class="mt-1"><%= link_to link_text, event_path(event.id), class: "btn btn-sm btn-primary" %>
-    </li>
+    <% cache event do %>
+      <li class="list-group-item mb-3" data-uuid="<%= event.id %>">
+        <%= render partial: "event_details", locals: { event: } %>
+        <% link_text = event.past? ? "View Details" : "Book Now" %>
+        <div class="mt-1"><%= link_to link_text, event_path(event.id), class: "btn btn-sm btn-primary" %>
+      </li>
+    <% end %>
   <% end %>
 </ul>
