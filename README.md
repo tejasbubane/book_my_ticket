@@ -38,3 +38,5 @@ Handles case when multiple users try to book more than available tickets. Multip
 * **Error handling with monads:** [TicketBookingService](app/services/ticket_booking_service.rb) uses [dry-monads](https://dry-rb.org/gems/dry-monads/1.6/result/) to elegantly handle `Success` and `Failure` cases.
 
 * **Query Object:** [EventsQuery](app/queries/events_query.rb) encapsulates code for fetching created, booked and all events.
+
+* **Custom matcher:** Making tests more readable with [this RSpec custom matcher](spec/support/event_matcher.rb) for checking if data element with event ID exists on the page.
