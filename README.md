@@ -14,6 +14,11 @@ Simple event ticket booking system built with Ruby on Rails.
 
 * How to run the test suite: `bundle exec rspec`
 
+# Core Functionality
+
+* Registration, login, logout
+* Create events, book tickets
+* View list of all events, my events, my bookings
 
 # System design and challenges
 
@@ -40,3 +45,12 @@ Handles case when multiple users try to book more than available tickets. Multip
 * **Query Object:** [EventsQuery](app/queries/events_query.rb) encapsulates code for fetching created, booked and all events.
 
 * **Custom matcher:** Making tests more readable with [this RSpec custom matcher](spec/support/event_matcher.rb) for checking if data element with event ID exists on the page.
+
+# Out of scope
+
+Following limitations were assumed and some items were considered out of scope:
+
+* Tickets do not have names and are transferrable.
+* Simple one-click ticket booking flow. No payment step - hence no pending status field on tickets.
+* Instead of listing all tickets, show booked shows with number of tickets booked.
+* No multi-language (i18n).
