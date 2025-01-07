@@ -46,6 +46,10 @@ Handles case when multiple users try to book more than available tickets. Multip
 
 * **Custom matcher:** Making tests more readable with [this RSpec custom matcher](spec/support/event_matcher.rb) for checking if data element with event ID exists on the page.
 
+* **Authentication:** Not using [new Rails 8 authentication generator](https://www.bigbinary.com/blog/rails-8-introduces-a-basic-authentication-generator). Hand-rolled authentication using Rails' inbuilt `has_secure_password`.
+
+* **Test Coverage:** Maintain test coverage more than `90%`. Checked using [Simplecov](https://github.com/simplecov-ruby/simplecov).
+
 # Out of scope
 
 Following limitations were assumed and some items were considered out of scope:
@@ -54,3 +58,4 @@ Following limitations were assumed and some items were considered out of scope:
 * Simple one-click ticket booking flow. No payment step - hence no pending status field on tickets.
 * Instead of listing all tickets, show booked shows with number of tickets booked.
 * No multi-language (i18n).
+* No admin role to create events - all users can create events.
